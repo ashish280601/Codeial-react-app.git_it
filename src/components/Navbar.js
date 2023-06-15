@@ -21,7 +21,7 @@ const Navbar = () => {
               className={styles.userDp}
             />
           </a>
-          <span>Aakash</span>
+          <span>Ashish</span>
         </div>
 
         <div className={styles.navLinks}>
