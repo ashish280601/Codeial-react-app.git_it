@@ -1,3 +1,6 @@
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
@@ -41,6 +44,7 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer />
       <Router>
         <Navbar />
         <Routes>
