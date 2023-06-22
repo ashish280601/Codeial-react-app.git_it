@@ -8,6 +8,7 @@ import { Loader } from '../components';
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState([]);
+  // const auth = useAuth();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -73,6 +74,7 @@ const Home = () => {
           </div>
         </div>
       ))}
+
     </div>
   );
 };
