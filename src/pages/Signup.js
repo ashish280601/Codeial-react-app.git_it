@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-use-history'
+import { useNavigate, Navigate } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
-
 import { useAuth } from '../hooks';
 import styles from '../styles/login.module.css';
 
@@ -13,12 +12,14 @@ const Signup = () => {
   const [signingUp, setSigningUp] = useState('');
   const { addToast } = useToasts();
   const auth = useAuth();
-  const history = useHistory();
+  const history = useNavigate();  // this is browser history act as stack
+  // console.log("history obj",history);
 
   const handleFormSubmit = async (e) => {
+   
     e.preventDefault();
     setSigningUp(true);
-
+      console.log(name,email,password,confirmPassword);
     let error = false;
     if (!name || !email || !password || !confirmPassword) {
       addToast('Please fill all the fields', {
@@ -42,9 +43,13 @@ const Signup = () => {
     }
 
     const response = await auth.signup(name, email, password, confirmPassword);
+    
 
     if (response.success) {
-      history.push('/login');
+      // this history.push will basicall push the login page to the stack and we will be redirected to it 
+      // history.push('/login');
+      // <Navigate to='/login'/>
+      history('/login');   // and this will redirect us to the login page via this url
       setSigningUp(false);
 
       return addToast('User registered successfully, please login now', {
@@ -52,6 +57,7 @@ const Signup = () => {
         autoDismiss: true,
       });
     } else {
+      console.log(response.message);
       addToast(response.message, {
         appearance: 'error',
         autoDismiss: true,
@@ -60,7 +66,10 @@ const Signup = () => {
 
     setSigningUp(false);
   };
-
+  // if user alredy exist then we will not rendreing this page
+  if(auth.user){
+    return <Navigate to='/'/>
+  }
   return (
     <form className={styles.loginForm} onSubmit={handleFormSubmit}>
       <span className={styles.loginSignupHeader}> Signup</span>
@@ -85,7 +94,7 @@ const Signup = () => {
       </div>
       <div className={styles.field}>
         <input
-          placeholder="Confirm password"
+          placeholder="password"
           type="password"
           required
           value={password}
@@ -94,7 +103,7 @@ const Signup = () => {
       </div>
       <div className={styles.field}>
         <input
-          placeholder="Password"
+          placeholder="Confirm Password"
           type="password"
           required
           value={confirmPassword}
