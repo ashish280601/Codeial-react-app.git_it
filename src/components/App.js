@@ -2,7 +2,7 @@ import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
-import { Home, Login, Signup, Settings } from '../pages';
+import { Home, Login, Signup, Settings, UserProfile } from '../pages';
 import { Loader, Navbar } from './';
 import { useAuth } from '../hooks';
 
@@ -17,7 +17,7 @@ function PrivateRoute({ children, ...rest }) {
           return children;
         }
 
-        return auth ?  <Settings /> : <Navigate to="/login" />;
+        return <Navigate to="/login" />;
       }}
     />
   );
@@ -43,8 +43,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
-          <Route path="/settings" element={<PrivateRoute />} />
-          <Route element={<Page404 />} />
+          <Route path="/settings" element={<PrivateRoute> <Settings /> </PrivateRoute>} />
+          <Route path="/user/:userId" element={<PrivateRoute> <UserProfile /> </PrivateRoute>} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>
     </div>
