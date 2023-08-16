@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth} from '../hooks';
 import { useToasts } from 'react-toast-notifications';
-import styles from '../styles/settings.module.css';
+import styles from '../styles/settings.module.css'
 
   
 const Settings = () => {

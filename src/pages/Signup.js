@@ -13,7 +13,7 @@ const Signup = () => {
   const { addToast } = useToasts();
   const auth = useAuth();
   const history = useNavigate();  // this is browser history act as stack
-  console.log("history obj",history);
+  // console.log("history obj",history);
 
   const handleFormSubmit = async (e) => {
    

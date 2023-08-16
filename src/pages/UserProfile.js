@@ -34,6 +34,7 @@ const UserProfile = () => {
     getUser();
   }, [userId, addToast, navigate]);
 
+
   if (Loading) {
     return <Loader />;
   }
